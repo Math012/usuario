@@ -69,6 +69,7 @@ public class UsuarioConverter {
 
     public EnderecoDTO enderecoParaEnderecoDTO(Endereco endereco){
         return EnderecoDTO.builder()
+                .id(endereco.getId())
                 .rua(endereco.getRua())
                 .numero(endereco.getNumero())
                 .complemento(endereco.getComplemento())
@@ -84,6 +85,7 @@ public class UsuarioConverter {
 
     public TelefoneDTO telefoneParaTelefoneDTO(Telefone telefone){
         return TelefoneDTO.builder()
+                .id(telefone.getId())
                 .numero(telefone.getNumero())
                 .ddd(telefone.getDdd())
                 .build();
@@ -99,4 +101,25 @@ public class UsuarioConverter {
                 .telefones(usuario.getTelefones())
                 .build();
     }
+
+    public Endereco updateEndereco(EnderecoDTO enderecoDTO, Endereco endereco){
+        return Endereco.builder()
+                .id(endereco.getId())
+                .rua(enderecoDTO.getRua() != null ? enderecoDTO.getRua() : endereco.getRua())
+                .numero(enderecoDTO.getNumero() != null ? enderecoDTO.getNumero() : endereco.getNumero())
+                .complemento(enderecoDTO.getComplemento() != null ? enderecoDTO.getComplemento() : endereco.getComplemento())
+                .cidade(enderecoDTO.getCidade() != null ? enderecoDTO.getCidade() : endereco.getCidade())
+                .estado(enderecoDTO.getEstado() != null ? enderecoDTO.getEstado() : endereco.getEstado())
+                .cep(enderecoDTO.getCep() != null ? enderecoDTO.getCep() : endereco.getCep())
+                .build();
+    }
+
+    public Telefone updateTelefone(TelefoneDTO telefoneDTO, Telefone telefone){
+        return Telefone.builder()
+                .id(telefone.getId())
+                .ddd(telefoneDTO.getDdd() != null ? telefoneDTO.getDdd() : telefone.getDdd())
+                .numero(telefoneDTO.getNumero() != null ? telefoneDTO.getNumero() : telefone.getNumero())
+                .build();
+    }
+
 }
